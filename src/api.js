@@ -41,3 +41,5 @@ export const newGamesURL = () => `${base_rul}${new_games}`;
 
 // Game Details
 export const gameDetailsURL = (game_id) => `${base_rul}games/${game_id}`;
+export const gameScreenshotURL = (game_id) =>
+  `${base_rul}games/${game_id}/screenshots`;

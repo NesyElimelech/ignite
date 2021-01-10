@@ -1,4 +1,6 @@
 import React from 'react';
+// Router
+import { Route } from 'react-router-dom';
 // Styles
 import GlobalStyle from './styles/GlobalStyles';
 // Components and pages
@@ -8,7 +10,9 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <Home />
+      <Route path={['/game/:id', '/']}>
+        <Home />
+      </Route>
     </div>
   );
 }
