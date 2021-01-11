@@ -62,6 +62,10 @@ const GlobalStyle = createGlobalStyle`
     img{
         display: block;
     }
+    input{
+        font-size: 1.5rem;
+        font-family: 'Montserrat', sans-serif;
+    }
 
 `;
 

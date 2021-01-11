@@ -34,6 +34,9 @@ const popular_games = `games?dates=${lastYear},${currentDate}&ordering=-rating&p
 const upcoming_games = `games?dates=${currentDate},${nextYear}&ordering=-added&page_size=10`;
 // New games
 const new_games = `games?dates=${lastYear},${currentDate}&ordering=-released&page_size=10`;
+// searched games
+export const searchedGameURL = (game_name) =>
+  `${base_rul}games?search=${game_name}&page_size=9`;
 
 export const popularGamesURL = () => `${base_rul}${popular_games}`;
 export const upcomingGamesURL = () => `${base_rul}${upcoming_games}`;

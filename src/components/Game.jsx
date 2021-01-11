@@ -1,27 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { smallerImage } from '../util';
 // Styling and Animation
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { popup } from '../animations';
 // Redux
 import { useDispatch } from 'react-redux';
 import { loadDetail } from '../store/actions/detailAction';
 // Router
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Game = ({ name, released, image, id }) => {
+  const history = useHistory();
+  // Fixing animation transition bug
+  const stringPathId = id.toString();
+
   // Load detail handler
   const dispatch = useDispatch();
   const loadDetailHandler = () => {
-    document.body.style.overflow = 'hidden';
     dispatch(loadDetail(id));
   };
 
+  useEffect(() => {
+    if (history.location.pathname === '/') {
+      document.body.style.overflow = 'auto';
+    } else {
+      document.body.style.overflow = 'hidden';
+    }
+  }, [history.location]);
+
   return (
-    <StyledGames onClick={loadDetailHandler}>
+    <StyledGames
+      variants={popup}
+      initial="hidden"
+      animate="show"
+      layoutId={stringPathId}
+      onClick={loadDetailHandler}
+    >
       <Link to={`/games/${id}`}>
-        <h3>{name}</h3>
+        <motion.h3 layoutId={`title${stringPathId}`}>{name}</motion.h3>
         <p>{released}</p>
-        <img src={image} alt={name} />
+        <motion.img
+          layoutId={`image ${stringPathId}`}
+          src={smallerImage(image, 640)}
+          alt={name}
+          loading="lazy"
+        />
       </Link>
     </StyledGames>
   );

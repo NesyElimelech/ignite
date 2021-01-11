@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { popularGamesURL, upcomingGamesURL, newGamesURL } from '../../api';
+import {
+  popularGamesURL,
+  upcomingGamesURL,
+  newGamesURL,
+  searchedGameURL,
+} from '../../api';
 
 // Action Creator
 export const loadGames = () => async (dispatch) => {
@@ -16,4 +21,14 @@ export const loadGames = () => async (dispatch) => {
     },
   });
   return {};
+};
+
+export const fetchSearch = (game_name) => async (dispatch) => {
+  const searchGames = await axios.get(searchedGameURL(game_name));
+  dispatch({
+    type: 'FETCH_SEARCHED',
+    payload: {
+      searched: searchGames.data.results,
+    },
+  });
 };
